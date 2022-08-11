@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                 // reference: https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
-                img = registry + ":${env.BUILD_ID}"
+                img = registry + ":latest"
                 // reference: https://docs.cloudbees.com/docs/admin-resources/latest/plugins/docker-workflow
                 dockerImage = docker.build("${img}")
                 }
