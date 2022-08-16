@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: springboot-sample
-          image: <Your Docker Image>:<Your Image Tag>
+          image: ecarmona1992/interview:7
           ports:
             - containerPort: 8080
 ---
@@ -27,7 +27,7 @@ metadata:
     name: sample-spring-boot
 spec:
   ports:
-    - port: 8080 # The service will publish the application on the default http port(80)
+    - port: 9000 # The service will publish the application on the default http port(80)
       targetPort: 8080
       protocol: TCP
   selector:
