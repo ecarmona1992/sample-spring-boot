@@ -3,6 +3,7 @@ pipeline {
         environment {
         registry = "ecarmona1992/interview"
         registrycredential = 'docker-hub-login'
+        SONAR_TOKEN = 'SONAR_TOKEN'
         // EKS_CLUSTER_NAME = "demo-cluster"
     }
     stages {
@@ -14,13 +15,14 @@ pipeline {
                 sh 'chmod +x gradlew && ./gradlew build jacocoTestReport'
             }
         }
-        // stage('sonarqube') {
-        // agent {
-        //     docker { image '<some sonarcli image>' } }
-        //     steps {
-        //         sh 'echo scanning!'
-        //     }
-        // }
+        stage('sonarqube') {
+        agent {
+            docker { image 'openjdk:11-jdk' } 
+            }
+            steps {
+                sh './gradlew sonarqube'
+            }
+        }
         stage('docker build') {
             steps {
                 script {
