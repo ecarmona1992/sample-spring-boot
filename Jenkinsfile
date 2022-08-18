@@ -21,9 +21,10 @@ pipeline {
             }
             steps {
                 script {
-                    withSonarQubeEnv(credentialsId: 'SONAR_TOKEN') {
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
                             sh 'chmod +x gradlew'
                             sh './gradlew sonarqube'
+                            sh  'java -version'
                     }
 
                     timeout(time: 1, unit: 'HOURS') {
@@ -33,6 +34,7 @@ pipeline {
                       }
                 }
             }
+        }
         }
         stage('docker build') {
             steps {
