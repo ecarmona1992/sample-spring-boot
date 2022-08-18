@@ -14,10 +14,6 @@ repositories {
 	mavenCentral()
 }
 
-plugins {
-  
-}
-
 sonarqube {
   properties {
     property "sonar.projectKey", "ecarmona1992_sample-spring-boot"
