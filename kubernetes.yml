@@ -32,4 +32,4 @@ spec:
       protocol: TCP
   selector:
     app: sample-spring-boot
-  type: LoadBalancer # Type loadbalancer will use the underlying cloud provider to create an external url for accessing the app
+  type: LoadBalancer 
