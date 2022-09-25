@@ -1,39 +1,24 @@
-pipeline {
-    agent none
-        environment {
-        ENV_DOCKER = credentials('dockerhub')
-        DOCKERIMAGE = "dummy/dummy"
-        EKS_CLUSTER_NAME = "demo-cluster"
+pipeline{
+    agent{
+        label "node"
     }
-    stages {
-        stage('build') {
-            agent {
-                docker { image 'openjdk:11-jdk' }
-            }
-            steps {
-                sh 'chmod +x gradlew && ./gradlew build jacocoTestReport'
+    stages{
+        stage("Build"){
+            steps{
+                echo "starting the build step"
             }
         }
-        stage('sonarqube') {
-        agent {
-            docker { image '<some sonarcli image>' } }
-            steps {
-                sh 'echo scanning!'
+
+        stage("Test"){
+            steps{
+                echo "Starting tests"
             }
         }
-        stage('docker build') {
-            steps {
-                sh 'echo docker build'
+
+        stage("Deploy"){
+            steps{
+                echo "Starting the deploy"
             }
         }
-        stage('docker push') {
-            steps {
-                sh 'echo docker push!'
-                }
-            }
-        stage('Deploy App') {
-            steps {
-                sh 'echo deploy to kubernetes'               
-            }
     }
 }
