@@ -6,20 +6,21 @@ pipeline{
     }
 
     stages{
-        stage("Build"){
+        stage("Build & JUnit test"){
             steps{
-                echo "starting the build step"
+                echo "starting the build/test step"
                 sh 'mvn clean install'
             }
         }
 
-        stage("Test"){
+        stage("Sonarcloud test"){
             steps{
                 echo "Starting tests"
+                sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=baltimore-test'
             }
         }
 
-        stage("Deploy"){
+        stage("Deploy to K8s"){
             steps{
                 echo "Starting the deploy"
             }
